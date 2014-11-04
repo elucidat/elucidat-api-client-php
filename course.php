@@ -35,6 +35,10 @@
     }
 
     $result = get_from_api('https://api.elucidat.com/releases/{{release_code}}/launch','<YOUR PUBLIC KEY>','<YOUR SECRET KEY>');
+
+    if ($result['status'] == 400 || !$result['response'])
+        exit('Please remember to put your credentials in.');
+
     $outcome = json_decode($result['response'], true);
 
     print file_get_contents($outcome['url']);
